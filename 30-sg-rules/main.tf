@@ -49,3 +49,13 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
   security_group_id = local.rabbitmq_sg_id  # rabbitmq SG
   source_security_group_id = local.bastion_sg_id # Bastion sg
 }
+
+# MySQL accepting connections from bastion
+resource "aws_security_group_rule" "rabbitmq_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = local.mysql_sg_id  # mysql SG
+  source_security_group_id = local.bastion_sg_id # Bastion sg
+}
