@@ -98,7 +98,7 @@ resource "aws_instance" "rabbitmq" {
 
 resource "terraform_data" "rabbitmq" {
   triggers_replace = [
-    aws_instance.redis.id
+    aws_instance.rabbitmq.id
   ]
 
   connection {
@@ -110,7 +110,7 @@ resource "terraform_data" "rabbitmq" {
 
   provisioner "file" {
     source = "bootstrap.sh" # Local file path
-    destination = "/tmp/bootstrap.sh" # Destination on redis EC2
+    destination = "/tmp/bootstrap.sh" # Destination on rabbitmq EC2
   }
 
   provisioner "remote-exec" {
