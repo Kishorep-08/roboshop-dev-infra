@@ -14,6 +14,17 @@ resource "aws_security_group_rule" "bastion_laptop" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  security_group_id = local.bastion_sg_id  # Bastion alb SG
+  security_group_id = local.bastion_sg_id  # Bastion SG
   cidr_blocks       =  ["0.0.0.0/0"]
+}
+
+
+# MongoDB accepting connections from bastion
+resource "aws_security_group_rule" "mongodb_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = local.mongodb_sg_id  # mongodb SG
+  source_security_group_id = local.bastion_sg_id # Bastion sg
 }
