@@ -14,11 +14,11 @@ ANSIBLE_DIR=ansible-roboshop-roles-tf
 
 mkdir -p $REPO_DIR
 mkdir -p $LOGS_DIR
-touch ansible.log
+touch $LOGS_DIR/ansible.log
 
 cd $REPO_DIR
 
-if [ -d $REPO_DIR ];
+if [ -d $ANSIBLE_DIR ];
 then
     cd $ANSIBLE_DIR
     git pull
