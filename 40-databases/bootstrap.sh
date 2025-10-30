@@ -6,6 +6,7 @@
 # ansible-pull -U https://github.com/Kishorep-08/ansible-roboshop-roles-tf.git main.yaml
 
 component=$1
+environment=$2
 REPO_url=https://github.com/Kishorep-08/ansible-roboshop-roles-tf.git
 LOGS_DIR=/var/log/roboshop/
 REPO_DIR=/opt/roboshop/ansible/
@@ -26,6 +27,6 @@ else
     cd $ANSIBLE_DIR
 fi
 
-ansible-playbook -e component=$component main.yaml
+ansible-playbook -e component=$component -e environment=$environment main.yaml
 
 
