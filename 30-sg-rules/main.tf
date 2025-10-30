@@ -51,7 +51,7 @@ resource "aws_security_group_rule" "rabbitmq_bastion" {
 }
 
 # MySQL accepting connections from bastion
-resource "aws_security_group_rule" "rabbitmq_bastion" {
+resource "aws_security_group_rule" "mysql_bastion" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
