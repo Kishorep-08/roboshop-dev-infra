@@ -16,7 +16,7 @@ module "sg" {
     vpc_id = local.vpc_id
 }
 
-# Frontedn LB to Frontend SG rule
+# Frontedn accepting traffic from frontend alb
 
 # resource "aws_security_group_rule" "frontend_alb_to_frontend" {
 #   type              = "ingress"

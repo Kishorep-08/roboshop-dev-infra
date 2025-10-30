@@ -34,7 +34,7 @@ resource "terraform_data" "mongodb" {
     inline = [
       "echo Hello World!",
       "chmod +x /tmp/bootstrap.sh",
-      "sudo sh /tmp/bootstrap.sh mongodb"
+      "sudo sh /tmp/bootstrap.sh"
     ]
   }
 }
@@ -75,7 +75,7 @@ resource "terraform_data" "redis" {
     inline = [
       "echo Hello World!",
       "chmod +x /tmp/bootstrap.sh",
-      "sudo sh /tmp/bootstrap.sh redis"
+      "sudo sh /tmp/bootstrap.sh"
     ]
   }
 }
@@ -117,7 +117,7 @@ resource "terraform_data" "rabbitmq" {
     inline = [
       "echo Hello World!",
       "chmod +x /tmp/bootstrap.sh",
-      "sudo sh /tmp/bootstrap.sh rabbitmq"
+      "sudo sh /tmp/bootstrap.sh"
     ]
   }
 }
