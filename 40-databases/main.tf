@@ -170,3 +170,40 @@ resource "terraform_data" "mysql" {
   }
 }
 
+# Route53 record for MongoDB
+
+resource "aws_route53_record" "mongodb" {
+  zone_id = data.aws_route53_zone.hosted_zone_id.zone_id
+  name    = "mongodb-${var.environment}.${var.domain_name}"  # mongodb-dev.kishore-p.space
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.mongodb.private_ip]
+}
+
+# Route53 record for Redis
+
+resource "aws_route53_record" "redis" {
+  zone_id = data.aws_route53_zone.hosted_zone_id.zone_id
+  name    = "redis-${var.environment}.${var.domain_name}"  # redis-dev.kishore-p.space
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.redis.private_ip]
+}
+
+# Route53 record for RabbitMQ
+resource "aws_route53_record" "rabbitmq" {
+  zone_id = data.aws_route53_zone.hosted_zone_id.zone_id
+  name    = "rabbitmq-${var.environment}.${var.domain_name}"  # rabbitmq-dev.kishore-p.space
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.rabbitmq.private_ip]
+}
+
+# Route53 record for MySQL
+resource "aws_route53_record" "mysql" {
+  zone_id = data.aws_route53_zone.hosted_zone_id.zone_id
+  name    = "mysql-${var.environment}.${var.domain_name}"  # mysql-dev.kishore-p.space
+  type    = "A"
+  ttl     = 1
+  records = [aws_instance.mysql.private_ip]
+}
