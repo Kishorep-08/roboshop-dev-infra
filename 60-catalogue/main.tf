@@ -37,3 +37,17 @@ resource "terraform_data" "catalogue" {
     ]
   }
 }
+
+# Stopping catalogue instance to take AMI
+resource "aws_ec2_instance_state" "catalogue" {
+instance_id = "${aws_instance.catalogue.id}" 
+state       = "stopped"
+depends_on = [terraform_data.catalogue]  
+}           
+
+# To take AMI from catalogue instance
+resource "aws_ami_from_instance" "catalogue-ami" {
+  name               = "${local.common_name}" # roboshop-dev-catalogue-ami
+  source_instance_id = "${aws_instance.catalogue.id}"
+  depends_on = [aws_ec2_instance_state.catalogue]
+}
