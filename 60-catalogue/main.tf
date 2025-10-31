@@ -33,7 +33,7 @@ resource "terraform_data" "catalogue" {
     inline = [
       "echo Hello World!",
       "chmod +x /tmp/catalogue.sh",
-      "sudo sh /tmp/catalogue.sh mongodb ${var.environment}"
+      "sudo sh /tmp/catalogue.sh catalogue ${var.environment}"
     ]
   }
 }
