@@ -40,5 +40,5 @@ data "aws_ssm_parameter" "database_subnet_ids" {
 
 data "aws_route53_zone" "hosted_zone_id" {
   name         = "kishore-p.space"
-  private_zone = true
+  private_zone = false
 }
