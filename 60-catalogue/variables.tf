@@ -7,3 +7,8 @@ variable "environment" {
     type = string
     default = "dev"
 }
+
+variable "ami_name" {
+    type = string
+    default = "DevOps-Practice"
+}

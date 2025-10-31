@@ -19,8 +19,8 @@ resource "terraform_data" "catalogue" {
 
   connection {
     type = "ssh"
-    user = "ec2-user"
-    password = "DevOps321"
+    user = "${aws_ssm_parameter.ami_uname.value}"
+    password = "${aws_ssm_parameter.ami_pwd.value}"
     host = "${aws_instance.catalogue.private_ip}"
   }
 
