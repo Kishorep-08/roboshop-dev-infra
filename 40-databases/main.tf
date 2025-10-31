@@ -179,7 +179,7 @@ resource "aws_route53_record" "mongodb" {
   ttl     = 1
   records = [aws_instance.mongodb.private_ip]
 }
-
+# aws_route53_zone" "hosted_zone_id
 # Route53 record for Redis
 
 resource "aws_route53_record" "redis" {
