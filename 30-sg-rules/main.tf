@@ -59,3 +59,13 @@ resource "aws_security_group_rule" "mysql_bastion" {
   security_group_id = local.mysql_sg_id  # mysql SG
   source_security_group_id = local.bastion_sg_id # Bastion sg
 }
+
+# Catalogue accepting connections from bastion
+resource "aws_security_group_rule" "catalogue_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = local.catalogue_sg_id  # catalogue SG
+  source_security_group_id = local.bastion_sg_id # Bastion sg
+}
