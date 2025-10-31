@@ -50,4 +50,10 @@ resource "aws_ami_from_instance" "catalogue-ami" {
   name               = "${local.common_name}" # roboshop-dev-catalogue-ami
   source_instance_id = "${aws_instance.catalogue.id}"
   depends_on = [aws_ec2_instance_state.catalogue]
+  tags = merge (
+    local.common_tags,
+    {
+        Name = "${local.common_name}-catalogue"
+    }
+  )
 }
