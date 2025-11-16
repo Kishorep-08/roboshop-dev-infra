@@ -8,6 +8,7 @@ locals {
 
 locals {
     private_subnet_ids = split(",", data.aws_ssm_parameter.private_subnet_ids.value)[0]
+    vpc_zone_identifier = split(",", data.aws_ssm_parameter.private_subnet_ids.value)
 }
 
 locals {
