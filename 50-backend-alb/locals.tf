@@ -7,4 +7,6 @@ locals {
         Project = var.project_name
         Environment = var.environment
     }
+    zone_id = data.aws_route53_zone.hosted_zone_id.zone_id
+    
 }
