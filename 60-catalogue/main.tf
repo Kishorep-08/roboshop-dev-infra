@@ -86,7 +86,7 @@ resource "aws_launch_template" "catalogue" {
 
   instance_type = "t3.micro"
 
-  vpc_security_group_ids = ["local.catalogue_sg_id"]
+  vpc_security_group_ids = ["${local.catalogue_sg_id}"]
 
   tag_specifications {
     resource_type = "instance"
