@@ -79,3 +79,13 @@ resource "aws_security_group_rule" "mongodb_catalogue" {
   security_group_id = local.mongodb_sg_id  # catalogue SG
   source_security_group_id = local.catalogue_sg_id # Bastion sg
 }
+
+# Catalogue accepting traffic from backend alb
+resource "aws_security_group_rule" "catalogue_backend_alb" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id =   local.catalogue_sg_id  # catalogue SG
+  source_security_group_id =  local.backend_alb_sg_id # backend alb sg
+}
