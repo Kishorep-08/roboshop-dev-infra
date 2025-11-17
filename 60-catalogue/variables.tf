@@ -12,3 +12,8 @@ variable "ami_name" {
     type = string
     default = "DevOps-Practice"
 }
+
+variable "domain_name" {
+    type = string
+    default = "kishore-p.space"
+}

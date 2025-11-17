@@ -40,9 +40,9 @@ resource "terraform_data" "catalogue" {
 
 # Stopping catalogue instance to take AMI
 resource "aws_ec2_instance_state" "catalogue" {
-instance_id = "${aws_instance.catalogue.id}" 
-state       = "stopped"
-depends_on = [terraform_data.catalogue]  
+  instance_id = "${aws_instance.catalogue.id}" 
+  state       = "stopped"
+  depends_on = [terraform_data.catalogue]  
 }           
 
 # To take AMI from catalogue instance
@@ -108,16 +108,11 @@ resource "aws_launch_template" "catalogue" {
 }
 
 # Autoscaling group for catalogue
-resource "aws_placement_group" "test" {
-  name     = "test"
-  strategy = "cluster"
-}
-
 resource "aws_autoscaling_group" "catalogue" {
   name                      = "${local.common_name}-catalogue"
   max_size                  = 5
   min_size                  = 1
-  health_check_grace_period = 300
+  health_check_grace_period = 100
   health_check_type         = "ELB"
   desired_capacity          = 1
   force_delete              = false
@@ -156,3 +151,21 @@ resource "aws_autoscaling_policy" "catalogue" {
     target_value = 75.0
   }
 }
+
+# Listener rule to forward traffic to catalogue target group
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = local.backend_listener_arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.catalogue.arn}"
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.backend-alb-${var.environment}.${var.domain_name}"]
+    }
+  }
+}
+
