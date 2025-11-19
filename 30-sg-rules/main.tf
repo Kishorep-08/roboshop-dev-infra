@@ -89,3 +89,13 @@ resource "aws_security_group_rule" "catalogue_backend_alb" {
   security_group_id =   local.catalogue_sg_id  # catalogue SG
   source_security_group_id =  local.backend_alb_sg_id # backend alb sg
 }
+
+# Frontend ALB accepting traffic from my laptop
+resource "aws_security_group_rule" "frontend_alb_laptop" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = local.frontend_alb_sg_id  # Bastion SG
+  cidr_blocks       =  ["0.0.0.0/0"]
+}
